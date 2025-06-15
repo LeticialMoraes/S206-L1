@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "9c060b56-6e0d-4200-8bcb-59441e5dab81",
+		"name": "Prova",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39659769"
+	},
+	"item": [
+		{
+			"name": "Teste Positivo com Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fakestoreapi.com/products/1",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teste Positivo com Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno contém ID\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"testeuser@email.com\",\r\n  \"username\": \"testeuser\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/users",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teste negativo com Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"falha ao criar usuário com dados incompletos\", function () {\r",
+							"    pm.expect(pm.response.code).to.not.eql(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"email@teste.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/users",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teste Positivo com Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Usuário deletado com sucesso\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json).to.have.property(\"id\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/users/1",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
